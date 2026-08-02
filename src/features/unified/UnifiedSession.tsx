@@ -4,12 +4,13 @@ import { BlocksCatalogPage } from './docs/BlocksCatalogPage'
 import { componentCatalog, blockCatalog, type CatalogSection } from './docs/catalog'
 import { ComponentsCatalogPage } from './docs/ComponentsCatalogPage'
 import { DocsSidebar } from './docs/DocsSidebar'
+import { withBasePath, withoutBasePath } from '../../lib/base-path'
 import './unified.css'
 
 type CatalogRoute = { section: CatalogSection; slug: string }
 
 function readRoute(): CatalogRoute {
-  const [section, slug] = window.location.pathname.split('/').filter(Boolean)
+  const [section, slug] = withoutBasePath(window.location.pathname).split('/').filter(Boolean)
   if (section === 'blocks') return { section: 'blocks', slug: blockCatalog.some((item) => item.slug === slug) ? slug : blockCatalog[0].slug }
   return { section: 'components', slug: componentCatalog.some((item) => item.slug === slug) ? slug : componentCatalog[0].slug }
 }
@@ -55,13 +56,13 @@ export function UnifiedSession() {
 
   function navigate(section: CatalogSection, slug: string) {
     const next = { section, slug }
-    window.history.pushState(next, '', `/${section}/${slug}${window.location.search}`)
+    window.history.pushState(next, '', `${withBasePath(`/${section}/${slug}`)}${window.location.search}`)
     setRoute(next)
     window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   }
 
   function routeHref(section: CatalogSection, slug: string) {
-    return `/${section}/${slug}${window.location.search}`
+    return `${withBasePath(`/${section}/${slug}`)}${window.location.search}`
   }
 
   function followRoute(event: MouseEvent<HTMLAnchorElement>, section: CatalogSection, slug: string) {

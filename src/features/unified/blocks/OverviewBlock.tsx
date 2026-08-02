@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Icon } from '../../../components/ui/Icon'
+import { withBasePath } from '../../../lib/base-path'
 import { AvatarGroup, Badge, ProgressBar, SectionTitle, Surface, UnifiedButton, ViewHeading } from '../components/UnifiedPrimitives'
 import type { UnifiedView } from '../types'
 
@@ -31,7 +32,7 @@ export function OverviewBlock({ onNavigate }: { onNavigate: (view: UnifiedView) 
         <div className="u-ai-brief-head"><span className="u-ai-orb"><Icon name="sparkles" /></span><Badge tone="neutral">Live brief</Badge></div>
         <h2>Protect the evening flow</h2>
         <p>Move one prep cook to cold station at 17:30 and approve the oat milk reorder before 15:00.</p>
-        <div className="u-ai-brief-art"><img src="/restaurant/mascot-group.png" width="1024" height="1024" alt="Restaurant operations crew" /></div>
+        <div className="u-ai-brief-art"><img src={withBasePath('/restaurant/mascot-group.png')} width="1024" height="1024" alt="Restaurant operations crew" /></div>
         <UnifiedButton tone="neutral" onClick={() => onNavigate('chat')}>Open assistant</UnifiedButton>
       </Surface>
 
