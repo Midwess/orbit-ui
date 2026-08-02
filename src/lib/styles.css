@@ -8,7 +8,7 @@
 
 .u-view-heading { min-height: 106px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
 .u-view-heading > div > span { display: block; margin-bottom: 7px; color: var(--u-accent); font-size: 11px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
-.u-view-heading h1 { max-width: 760px; margin: 0; color: var(--u-text); font-family: "Arial Narrow", "Roboto Condensed", sans-serif; font-size: clamp(35px, 3.2vw, 54px); font-weight: 650; letter-spacing: -.045em; line-height: .98; text-wrap: balance; }
+.u-view-heading h1 { max-width: 760px; margin: 0; color: var(--u-text); font-family: inherit; font-size: clamp(35px, 3.2vw, 54px); font-weight: 650; letter-spacing: -.045em; line-height: .98; text-wrap: balance; }
 .u-view-heading p { max-width: 700px; margin: 10px 0 0; color: var(--u-muted); font-size: 14px; line-height: 1.5; text-wrap: pretty; }
 .u-button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 17px; border: 1px solid transparent; border-radius: 15px; font-size: 13px; font-weight: 800; white-space: nowrap; }
 .u-button--compact { min-height: 38px; padding: 0 13px; border-radius: 13px; font-size: 12px; }
