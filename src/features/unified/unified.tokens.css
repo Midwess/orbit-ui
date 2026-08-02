@@ -1,3 +1,12 @@
+.unified-session,
+.orbit-ui {
+  --u-corner-shape: squircle;
+  --u-corner-shape-round: round;
+  --u-text-2xs: 0.625rem;
+  --u-text-xs: 0.75rem;
+  --u-text-sm: 0.875rem;
+}
+
 .unified-session[data-unified-theme="dark"],
 .orbit-ui[data-orbit-theme="dark"] {
   color-scheme: dark;

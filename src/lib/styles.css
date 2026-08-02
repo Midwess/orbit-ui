@@ -2,6 +2,8 @@
 
 .orbit-ui { color: var(--u-text); font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
 .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after { box-sizing: border-box; }
+.orbit-ui, .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after,
+.unified-session, .unified-session *, .unified-session *::before, .unified-session *::after { corner-shape: var(--u-corner-shape, squircle); }
 .orbit-ui button, .orbit-ui input, .orbit-ui select, .orbit-ui textarea { font: inherit; }
 .orbit-ui button { border: 0; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .orbit-ui button:focus-visible, .orbit-ui input:focus-visible, .orbit-ui select:focus-visible, .orbit-ui textarea:focus-visible { outline: 3px solid color-mix(in srgb, var(--u-accent) 45%, transparent); outline-offset: 2px; }
@@ -32,6 +34,7 @@
 .u-avatar--small { width: 32px; height: 32px; font-size: 9px; }.u-avatar--large { width: 52px; height: 52px; font-size: 13px; }
 .u-avatar-group { display: inline-flex; padding-left: 8px; }.u-avatar-group .u-avatar { margin-left: -8px; }
 .u-progress { display: grid; gap: 8px; }.u-progress > span { display: flex; justify-content: space-between; color: var(--u-muted); font-size: 11px; }.u-progress > span b { color: var(--u-text); }.u-progress > i { height: 7px; overflow: hidden; border-radius: 999px; background: var(--u-raised); }.u-progress > i > i { height: 100%; display: block; border-radius: inherit; background: var(--u-accent); }
+.u-badge, .u-avatar, .u-progress > i, .u-progress > i > i { corner-shape: var(--u-corner-shape-round, round); }
 
 @media (prefers-reduced-motion: reduce) {
   .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
