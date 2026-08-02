@@ -1,0 +1,68 @@
+{
+  "name": "@midwess/orbit-ui",
+  "version": "0.1.0",
+  "description": "Composable React components and product blocks for the Orbit design language.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/orbit-ui.cjs",
+  "module": "./dist/orbit-ui.js",
+  "types": "./dist/types/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/lib/index.d.ts",
+      "import": "./dist/orbit-ui.js",
+      "require": "./dist/orbit-ui.cjs"
+    },
+    "./styles.css": "./dist/orbit-ui.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:docs": "vite build",
+    "build": "npm run typecheck && npm run build:lib && npm run build:docs",
+    "preview": "vite preview --outDir docs-dist",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/midwess/orbit-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/midwess/orbit-ui/issues"
+  },
+  "homepage": "https://github.com/midwess/orbit-ui#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "design-system",
+    "ui-components",
+    "component-library"
+  ]
+}
