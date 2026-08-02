@@ -59,6 +59,7 @@ The public package currently exports `Button`, `IconAction`, `Surface`, `Badge`,
 - Keep product blocks independent from documentation-shell state.
 - Use semantic HTML and preserve keyboard, focus, status, and reduced-motion behavior.
 - Treat continuous G2-style squircle corners as a system requirement for every rounded rectangle; reserve round corners for true circles and capsules.
+- Use the shared button-radius tokens for standard, compact, and icon actions so control geometry stays consistent across products.
 - Reserve orange for primary decisions; use coral, violet, cyan, sage, and yellow for category and context.
 - Support both `data-orbit-theme="dark"` and `data-orbit-theme="light"`.
 
