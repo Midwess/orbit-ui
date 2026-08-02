@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
+    copyPublicDir: false,
     lib: {
       entry: resolve(import.meta.dirname, 'src/lib/index.ts'),
       name: 'OrbitUI',
