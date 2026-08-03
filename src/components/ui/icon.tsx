@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type ReactNode, type SVGProps } from 'react'
 
 export type IconName = 'home' | 'chart' | 'bag' | 'calendar' | 'map' | 'settings' | 'search' | 'bell' | 'arrow' | 'plus' | 'warning' | 'chevron' | 'users' | 'clock' | 'sparkles' | 'sun' | 'moon' | 'close' | 'mic' | 'check' | 'layers'
 
@@ -15,4 +15,27 @@ const paths: Record<IconName, ReactNode> = {
   check: <path d="m5 12 4 4L19 6" />,
   layers: <><path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5M3 17l9 5 9-5" /></>,
 }
-export function Icon({ name, size = 20 }: { name: IconName; size?: number }) { return <svg className="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg> }
+export type IconProps = Omit<SVGProps<SVGSVGElement>, 'name'> & {
+  name: IconName
+  size?: number
+}
+
+export function Icon({ name, size = 20, className = 'icon', ...props }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      {paths[name]}
+    </svg>
+  )
+}

@@ -1,5 +1,5 @@
 import { type FormEvent, type MouseEvent, useEffect, useState } from 'react'
-import { Icon } from '../../components/ui/Icon'
+import { Icon } from '../../components/ui/icon'
 import { BlocksCatalogPage } from './docs/BlocksCatalogPage'
 import { componentCatalog, blockCatalog, type CatalogSection } from './docs/catalog'
 import { ComponentsCatalogPage } from './docs/ComponentsCatalogPage'

@@ -1,7 +1,11 @@
 import { useMemo, useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
+import { Icon } from '../../../components/ui/icon'
+import { Badge } from '../../../components/ui/badge'
+import { Button as UnifiedButton } from '../../../components/ui/button'
+import { SectionTitle } from '../../../components/ui/section-title'
+import { Surface } from '../../../components/ui/surface'
+import { ViewHeading } from '../../../components/ui/view-heading'
 import { initialOrders } from '../data'
-import { Badge, SectionTitle, Surface, UnifiedButton, ViewHeading } from '../components/UnifiedPrimitives'
 import type { Order, OrderStatus } from '../types'
 
 type Filter = 'All' | OrderStatus
@@ -30,7 +34,7 @@ export function OrdersBlock() {
   }
 
   return <div className="u-view u-orders-view">
-    <ViewHeading eyebrow="Live service" title="Orders, without the clutter" description="A responsive list view for scanning, filtering, selecting, and updating operational work." action={<UnifiedButton tone="accent" icon="plus" onClick={addOrder}>New order</UnifiedButton>} />
+    <ViewHeading eyebrow="Live service" title="Orders, without the clutter" description="A responsive list view for scanning, filtering, selecting, and updating operational work." action={<UnifiedButton tone="accent" onClick={addOrder}><Icon name="plus" size={18} />New order</UnifiedButton>} />
     <div className="u-list-stats"><Surface tone="coral"><span>In progress</span><strong>{orders.filter((order) => order.status === 'Preparing').length}</strong><small>12 min average</small></Surface><Surface tone="sage"><span>Ready</span><strong>{orders.filter((order) => order.status === 'Ready').length}</strong><small>Pickup counter</small></Surface><Surface tone="yellow"><span>Needs attention</span><strong>{orders.filter((order) => order.status === 'Attention').length}</strong><small>Review now</small></Surface></div>
     <Surface className="u-orders-table">
       <SectionTitle title="Order queue" meta={`${visibleOrders.length} visible orders`} action={selected.length > 0 ? <UnifiedButton tone="accent" size="compact" onClick={markReady}>Mark {selected.length} ready</UnifiedButton> : undefined} />

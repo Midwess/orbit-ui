@@ -1,6 +1,8 @@
 import { type ChangeEvent, type KeyboardEvent, useId, useMemo, useRef, useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
-import { Avatar, Badge, UnifiedButton } from '../components/UnifiedPrimitives'
+import { Icon } from '../../../components/ui/icon'
+import { Avatar } from '../../../components/ui/avatar'
+import { Badge } from '../../../components/ui/badge'
+import { Button as UnifiedButton } from '../../../components/ui/button'
 import { DemoCard } from './DemoCard'
 
 export const advancedComponentSlugs = new Set(['accordion', 'alert', 'checkbox', 'combobox', 'dialog', 'file-upload', 'calendar', 'rating', 'skeleton', 'stepper', 'switch', 'timeline'])

@@ -1,7 +1,13 @@
 import { useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
+import { Icon } from '../../../components/ui/icon'
+import { Avatar, AvatarGroup } from '../../../components/ui/avatar'
+import { Badge } from '../../../components/ui/badge'
+import { Button as UnifiedButton } from '../../../components/ui/button'
+import { ProgressBar } from '../../../components/ui/progress'
+import { SectionTitle } from '../../../components/ui/section-title'
+import { Surface } from '../../../components/ui/surface'
+import { ViewHeading } from '../../../components/ui/view-heading'
 import { withBasePath } from '../../../lib/base-path'
-import { AvatarGroup, Badge, ProgressBar, SectionTitle, Surface, UnifiedButton, ViewHeading } from '../components/UnifiedPrimitives'
 import type { UnifiedView } from '../types'
 
 const chart = [42, 64, 52, 78, 68, 92, 74]
@@ -12,12 +18,12 @@ export function OverviewBlock({ onNavigate }: { onNavigate: (view: UnifiedView) 
   const toggleTask = (task: string) => setCompleted((current) => current.includes(task) ? current.filter((item) => item !== task) : [...current, task])
 
   return <div className="u-view u-overview-view">
-    <ViewHeading eyebrow="Sunday, 2 August" title="Good afternoon, Hanna" description="Your operation is moving well. Two signals deserve attention before the evening shift." action={<UnifiedButton tone="accent" icon="sparkles" onClick={() => onNavigate('chat')}>Ask Orbit AI</UnifiedButton>} />
+    <ViewHeading eyebrow="Sunday, 2 August" title="Good afternoon, Hanna" description="Your operation is moving well. Two signals deserve attention before the evening shift." action={<UnifiedButton tone="accent" onClick={() => onNavigate('chat')}><Icon name="sparkles" size={18} />Ask Orbit AI</UnifiedButton>} />
 
     <div className="u-metric-grid">
       <Surface tone="coral" className="u-metric-card"><span>Gross revenue</span><strong>$24,860</strong><footer><Badge tone="neutral">+12.4%</Badge><small>vs last Sunday</small></footer></Surface>
       <Surface tone="violet" className="u-metric-card"><span>Orders today</span><strong>184</strong><footer><Badge tone="neutral">28 live</Badge><small>12 min avg.</small></footer></Surface>
-      <Surface tone="sage" className="u-metric-card"><span>Team capacity</span><strong>87%</strong><footer><AvatarGroup people={[{ name: 'Maya', color: '#ff7c6e' }, { name: 'Noah', color: '#8c89ff' }, { name: 'Avery', color: '#a9e7f4' }]} /><small>14 on shift</small></footer></Surface>
+      <Surface tone="sage" className="u-metric-card"><span>Team capacity</span><strong>87%</strong><footer><AvatarGroup><Avatar name="Maya" color="#ff7c6e" size="small" /><Avatar name="Noah" color="#8c89ff" size="small" /><Avatar name="Avery" color="#a9e7f4" size="small" /></AvatarGroup><small>14 on shift</small></footer></Surface>
       <Surface tone="cyan" className="u-metric-card"><span>Guest sentiment</span><strong>4.8</strong><footer><Badge tone="success">Excellent</Badge><small>91 responses</small></footer></Surface>
     </div>
 

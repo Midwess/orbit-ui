@@ -1,6 +1,13 @@
 import { useState } from 'react'
+import { Avatar } from '../../../components/ui/avatar'
+import { Badge } from '../../../components/ui/badge'
+import { Button as UnifiedButton } from '../../../components/ui/button'
+import { Icon } from '../../../components/ui/icon'
+import { ProgressBar } from '../../../components/ui/progress'
+import { SectionTitle } from '../../../components/ui/section-title'
+import { Surface } from '../../../components/ui/surface'
+import { ViewHeading } from '../../../components/ui/view-heading'
 import { teamMembers as initialTeam } from '../data'
-import { Avatar, Badge, ProgressBar, SectionTitle, Surface, UnifiedButton, ViewHeading } from '../components/UnifiedPrimitives'
 import type { TeamMember } from '../types'
 
 const stages: TeamMember['status'][] = ['On shift', 'Break', 'Arriving']
@@ -19,7 +26,7 @@ export function TeamBlock() {
   }
 
   return <div className="u-view u-team-view">
-    <ViewHeading eyebrow="People & capacity" title="A calmer way to run the shift" description="See who is here, where capacity is going, and what each person needs next." action={<UnifiedButton tone="accent" icon="plus" onClick={addMember}>Add teammate</UnifiedButton>} />
+    <ViewHeading eyebrow="People & capacity" title="A calmer way to run the shift" description="See who is here, where capacity is going, and what each person needs next." action={<UnifiedButton tone="accent" onClick={addMember}><Icon name="plus" size={18} />Add teammate</UnifiedButton>} />
     <div className="u-team-summary">
       <Surface tone="violet" className="u-capacity-card"><SectionTitle title="Weekly capacity" meta="All locations" /><div className="u-capacity-number"><strong>87%</strong><Badge tone="neutral">Healthy</Badge></div><div className="u-capacity-days">{[72, 81, 88, 93, 87, 78, 64].map((value, index) => <div key={index}><i style={{ height: `${value}%` }} /><span>{['M', 'T', 'W', 'T', 'F', 'S', 'S'][index]}</span></div>)}</div></Surface>
       <Surface className="u-staffing-card"><SectionTitle title="Staffing health" meta="Live coverage" /><ProgressBar value={92} label="Floor" /><ProgressBar value={78} label="Kitchen" /><ProgressBar value={84} label="Delivery" /><p><span /> Kitchen coverage is the only watch item.</p></Surface>

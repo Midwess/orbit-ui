@@ -14,10 +14,12 @@ Import the package stylesheet once at the application root:
 import '@midwess/orbit-ui/styles.css'
 ```
 
-Then compose components directly:
+Then import only the component entry points an application uses:
 
 ```tsx
-import { Badge, Button, Surface } from '@midwess/orbit-ui'
+import { Badge } from '@midwess/orbit-ui/badge'
+import { Button } from '@midwess/orbit-ui/button'
+import { Surface } from '@midwess/orbit-ui/surface'
 
 export function Example() {
   return (
@@ -32,6 +34,21 @@ export function Example() {
 }
 ```
 
+The typed root export remains available for convenience, while component
+subpaths keep application imports explicit and independently consumable.
+
+## Install source with shadcn
+
+Orbit is also a public shadcn-compatible GitHub registry. Copy a component and
+its declared dependencies into an application with:
+
+```bash
+npx shadcn@latest add Midwess/orbit-ui/button
+```
+
+Registry consumers own the installed TypeScript source. Package consumers use
+the compiled npm artifacts; both modes share the same components and tokens.
+
 ## Development
 
 ```bash
@@ -45,13 +62,18 @@ npm run build
 ## Package structure
 
 ```text
-src/lib/                 Public package entry point and component styles
+src/index.ts             Typed root package entry point
+src/components/ui/       Directly importable TypeScript components
+src/lib/                 Dependency-free component utilities
+src/styles/              Tokens and distributable component styles
 src/features/unified/    Documentation catalog and reusable product blocks
-src/components/ui/       Shared icon implementation
+registry.json            shadcn-compatible GitHub source registry
 public/                  Demonstration imagery used by documentation blocks
 ```
 
-The public package currently exports `Button`, `IconAction`, `Surface`, `Badge`, `Avatar`, `AvatarGroup`, `ProgressBar`, `ViewHeading`, `SectionTitle`, and `Icon`.
+The public package exports `Button`, `IconAction`, `Surface`, `Badge`, `Avatar`,
+`AvatarGroup`, `ProgressBar`, `ViewHeading`, `SectionTitle`, `Icon`, and `cn`
+through both typed root exports and component subpaths.
 
 ## Design principles
 

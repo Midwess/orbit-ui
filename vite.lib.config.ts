@@ -4,14 +4,31 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': resolve(import.meta.dirname, 'src'),
+    },
+  },
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(import.meta.dirname, 'src/lib/index.ts'),
+      entry: {
+        index: resolve(import.meta.dirname, 'src/index.ts'),
+        avatar: resolve(import.meta.dirname, 'src/components/ui/avatar.tsx'),
+        badge: resolve(import.meta.dirname, 'src/components/ui/badge.tsx'),
+        button: resolve(import.meta.dirname, 'src/components/ui/button.tsx'),
+        icon: resolve(import.meta.dirname, 'src/components/ui/icon.tsx'),
+        'icon-action': resolve(import.meta.dirname, 'src/components/ui/icon-action.tsx'),
+        progress: resolve(import.meta.dirname, 'src/components/ui/progress.tsx'),
+        'section-title': resolve(import.meta.dirname, 'src/components/ui/section-title.tsx'),
+        surface: resolve(import.meta.dirname, 'src/components/ui/surface.tsx'),
+        'view-heading': resolve(import.meta.dirname, 'src/components/ui/view-heading.tsx'),
+        cn: resolve(import.meta.dirname, 'src/lib/cn.ts'),
+      },
       name: 'OrbitUI',
       formats: ['es', 'cjs'],
-      fileName: (format) => `orbit-ui.${format === 'es' ? 'js' : 'cjs'}`,
-      cssFileName: 'orbit-ui',
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
+      cssFileName: 'styles',
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],

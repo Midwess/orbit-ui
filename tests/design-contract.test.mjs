@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
+import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const tokens = await readFile(new URL('../src/features/unified/unified.tokens.css', import.meta.url), 'utf8')
-const styles = await readFile(new URL('../src/lib/styles.css', import.meta.url), 'utf8')
+const tokens = await readFile(new URL('../src/styles/tokens.css', import.meta.url), 'utf8')
+const styles = await readFile(new URL('../src/styles/components.css', import.meta.url), 'utf8')
+const registry = JSON.parse(await readFile(new URL('../registry.json', import.meta.url), 'utf8'))
+const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
 test('continuous squircle corners are the default Orbit geometry', () => {
   assert.match(tokens, /--u-corner-shape:\s*squircle;/)
@@ -27,4 +29,28 @@ test('true circles and capsules retain round geometry', () => {
 test('the smallest readable interface label starts at twelve pixels', () => {
   assert.match(tokens, /--u-text-xs:\s*0\.75rem;/)
   assert.match(tokens, /--u-text-sm:\s*0\.875rem;/)
+})
+
+test('the public package exposes typed, directly importable components', () => {
+  for (const name of ['avatar', 'badge', 'button', 'icon', 'icon-action', 'progress', 'section-title', 'surface', 'view-heading', 'cn']) {
+    const entry = packageJson.exports[`./${name}`]
+    assert.ok(entry, `missing package export: ${name}`)
+    assert.match(entry.types, /^\.\/dist\/types\//)
+    assert.match(entry.import, new RegExp(`^\\./dist/${name}\\.js$`))
+    assert.match(entry.require, new RegExp(`^\\./dist/${name}\\.cjs$`))
+  }
+})
+
+test('the shadcn source registry references real TypeScript and style files', async () => {
+  assert.equal(registry.$schema, 'https://ui.shadcn.com/schema/registry.json')
+  assert.ok(registry.items.some((item) => item.name === 'orbit-theme'))
+  assert.ok(registry.items.some((item) => item.name === 'button'))
+
+  for (const item of registry.items) {
+    assert.ok(item.name)
+    assert.ok(item.description)
+    for (const file of item.files) {
+      await access(new URL(`../${file.path}`, import.meta.url))
+    }
+  }
 })

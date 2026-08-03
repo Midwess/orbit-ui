@@ -9,8 +9,9 @@
     "rootDir": "src"
   },
   "include": [
-    "src/lib",
-    "src/components/ui/Icon.tsx",
+    "src/index.ts",
+    "src/components/ui",
+    "src/lib/cn.ts",
     "src/vite-env.d.ts"
   ]
 }

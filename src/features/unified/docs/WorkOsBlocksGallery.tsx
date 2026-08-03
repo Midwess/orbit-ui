@@ -1,5 +1,5 @@
 import { type FormEvent, useMemo, useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
+import { Icon } from '../../../components/ui/icon'
 import { withBasePath } from '../../../lib/base-path'
 import { DemoCard } from './DemoCard'
 

@@ -1,5 +1,5 @@
 import { type MouseEvent, useMemo, useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
+import { Icon } from '../../../components/ui/icon'
 import { blockCatalog, componentCatalog, type CatalogSection } from './catalog'
 
 export function DocsSidebar({ section, slug, onNavigate, routeHref }: { section: CatalogSection; slug: string; onNavigate: (event: MouseEvent<HTMLAnchorElement>, section: CatalogSection, slug: string) => void; routeHref: (section: CatalogSection, slug: string) => string }) {

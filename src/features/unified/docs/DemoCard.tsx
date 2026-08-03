@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Icon } from '../../../components/ui/Icon'
+import { Icon } from '../../../components/ui/icon'
 
 export function DemoCard({ title, description, code, children, className = '' }: { title: string; description?: string; code: string; children: ReactNode; className?: string }) {
   const [showCode, setShowCode] = useState(false)

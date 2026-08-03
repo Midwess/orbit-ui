@@ -1,5 +1,3 @@
-@import '../features/unified/unified.tokens.css';
-
 .orbit-ui { color: var(--u-text); font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
 .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after { box-sizing: border-box; }
 .orbit-ui, .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after,

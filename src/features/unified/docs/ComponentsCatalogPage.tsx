@@ -1,6 +1,10 @@
 import { useState } from 'react'
-import { Icon } from '../../../components/ui/Icon'
-import { Avatar, AvatarGroup, Badge, ProgressBar, Surface, UnifiedButton } from '../components/UnifiedPrimitives'
+import { Icon } from '../../../components/ui/icon'
+import { Avatar, AvatarGroup } from '../../../components/ui/avatar'
+import { Badge } from '../../../components/ui/badge'
+import { Button as UnifiedButton } from '../../../components/ui/button'
+import { ProgressBar } from '../../../components/ui/progress'
+import { Surface } from '../../../components/ui/surface'
 import { componentCatalog } from './catalog'
 import { AdvancedComponentExamples, advancedComponentSlugs } from './AdvancedComponentExamples'
 import { DemoCard } from './DemoCard'
@@ -23,7 +27,7 @@ function ButtonExamples() {
   const [saved, setSaved] = useState(false)
   return <div className="u-demo-grid">
     <DemoCard title="Action hierarchy" description="Accent, neutral, quiet, and destructive actions." code={'<Button tone="accent">Create order</Button>'}><div className="u-demo-stack"><div className="u-demo-inline"><UnifiedButton tone="accent" onClick={() => setResult('Order created')}>Create order</UnifiedButton><UnifiedButton tone="neutral" onClick={() => setResult('Changes saved')}>Save changes</UnifiedButton><UnifiedButton tone="quiet" onClick={() => setResult('Preview opened')}>Preview</UnifiedButton></div><Badge tone="accent">{result}</Badge></div></DemoCard>
-    <DemoCard title="Buttons with icons" description="Icons reinforce an already clear label." code={'<Button icon="sparkles">Ask Orbit AI</Button>'}><div className="u-demo-stack"><div className="u-demo-inline"><UnifiedButton tone="accent" icon="sparkles" onClick={() => setResult('Orbit AI opened')}>Ask Orbit AI</UnifiedButton><UnifiedButton tone="quiet" icon="plus" onClick={() => setResult('Teammate added')}>Add teammate</UnifiedButton></div><Badge tone="accent">{result}</Badge></div></DemoCard>
+    <DemoCard title="Buttons with icons" description="Icons reinforce an already clear label." code={'<Button><Icon name="sparkles" />Ask Orbit AI</Button>'}><div className="u-demo-stack"><div className="u-demo-inline"><UnifiedButton tone="accent" onClick={() => setResult('Orbit AI opened')}><Icon name="sparkles" size={18} />Ask Orbit AI</UnifiedButton><UnifiedButton tone="quiet" onClick={() => setResult('Teammate added')}><Icon name="plus" size={18} />Add teammate</UnifiedButton></div><Badge tone="accent">{result}</Badge></div></DemoCard>
     <DemoCard title="Compact actions" description="Dense but still comfortable at 38px." code={'<Button size="compact">View report</Button>'}><div className="u-demo-stack"><div className="u-demo-inline"><UnifiedButton size="compact" tone="neutral" onClick={() => setResult('Report opened')}>View report</UnifiedButton><UnifiedButton size="compact" tone="quiet" onClick={() => setResult('Action dismissed')}>Dismiss</UnifiedButton></div><Badge tone="accent">{result}</Badge></div></DemoCard>
     <DemoCard title="Loading outcome" description="Action feedback without layout movement." code={'<Button aria-busy={saving}>Saving…</Button>'}><UnifiedButton tone="neutral" aria-live="polite" onClick={() => setSaved((current) => !current)}>{saved ? 'Saved ✓' : 'Save workspace'}</UnifiedButton></DemoCard>
   </div>
@@ -44,7 +48,7 @@ function BadgeExamples() {
 }
 
 function AvatarExamples() {
-  return <div className="u-demo-grid"><DemoCard title="Fallback initials" code={'<Avatar name="Hanna Lee" color="coral" />'}><div className="u-demo-inline"><Avatar name="Hanna Lee" color="#ff7c6e" size="small" /><Avatar name="Maya Lopez" color="#8c89ff" /><Avatar name="Avery Singh" color="#a9e7f4" size="large" /></div></DemoCard><DemoCard title="Avatar group" code={'<AvatarGroup people={team} />'}><div className="u-demo-stack"><AvatarGroup people={[{ name: 'Hanna Lee', color: '#ff7c6e' }, { name: 'Maya Lopez', color: '#8c89ff' }, { name: 'Noah Kim', color: '#a9e7f4' }, { name: 'Orbit AI', color: '#ffd36b' }]} /><span className="u-demo-caption">4 people in this conversation</span></div></DemoCard></div>
+  return <div className="u-demo-grid"><DemoCard title="Fallback initials" code={'<Avatar name="Hanna Lee" color="coral" />'}><div className="u-demo-inline"><Avatar name="Hanna Lee" color="#ff7c6e" size="small" /><Avatar name="Maya Lopez" color="#8c89ff" /><Avatar name="Avery Singh" color="#a9e7f4" size="large" /></div></DemoCard><DemoCard title="Avatar group" code={'<AvatarGroup><Avatar name="Hanna Lee" /></AvatarGroup>'}><div className="u-demo-stack"><AvatarGroup><Avatar name="Hanna Lee" color="#ff7c6e" size="small" /><Avatar name="Maya Lopez" color="#8c89ff" size="small" /><Avatar name="Noah Kim" color="#a9e7f4" size="small" /><Avatar name="Orbit AI" color="#ffd36b" size="small" /></AvatarGroup><span className="u-demo-caption">4 people in this conversation</span></div></DemoCard></div>
 }
 
 function TabsExamples() {
