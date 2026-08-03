@@ -48,6 +48,15 @@ test('the public package exposes typed, directly importable components', () => {
   }
 })
 
+test('the documentation shell is a typed package entry for SSR hosts', () => {
+  const entry = packageJson.exports['./docs']
+  assert.ok(entry)
+  assert.equal(entry.types, './dist/types/docs.d.ts')
+  assert.equal(entry.import, './dist/docs.js')
+  assert.equal(entry.require, './dist/docs.cjs')
+  assert.equal(packageJson.exports['./docs.css'], './dist/docs.css')
+})
+
 test('the shadcn source registry references real TypeScript and style files', async () => {
   assert.equal(registry.$schema, 'https://ui.shadcn.com/schema/registry.json')
   assert.ok(registry.items.some((item) => item.name === 'orbit-theme'))

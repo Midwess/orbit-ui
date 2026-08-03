@@ -7,13 +7,14 @@ import { ProgressBar } from '../../../components/ui/progress'
 import { SectionTitle } from '../../../components/ui/section-title'
 import { Surface } from '../../../components/ui/surface'
 import { ViewHeading } from '../../../components/ui/view-heading'
-import { withBasePath } from '../../../lib/base-path'
+import { useBasePath, withBasePath } from '../../../lib/base-path'
 import type { UnifiedView } from '../types'
 
 const chart = [42, 64, 52, 78, 68, 92, 74]
 const tasks = ['Approve supplier order', 'Review spring menu crops', 'Confirm evening handover']
 
 export function OverviewBlock({ onNavigate }: { onNavigate: (view: UnifiedView) => void }) {
+  const basePath = useBasePath()
   const [completed, setCompleted] = useState<string[]>([tasks[2]])
   const toggleTask = (task: string) => setCompleted((current) => current.includes(task) ? current.filter((item) => item !== task) : [...current, task])
 
@@ -38,7 +39,7 @@ export function OverviewBlock({ onNavigate }: { onNavigate: (view: UnifiedView) 
         <div className="u-ai-brief-head"><span className="u-ai-orb"><Icon name="sparkles" /></span><Badge tone="neutral">Live brief</Badge></div>
         <h2>Protect the evening flow</h2>
         <p>Move one prep cook to cold station at 17:30 and approve the oat milk reorder before 15:00.</p>
-        <div className="u-ai-brief-art"><img src={withBasePath('/restaurant/mascot-group.png')} width="1024" height="1024" alt="Restaurant operations crew" /></div>
+        <div className="u-ai-brief-art"><img src={withBasePath('/restaurant/mascot-group.png', basePath)} width="1024" height="1024" alt="Restaurant operations crew" /></div>
         <UnifiedButton tone="neutral" onClick={() => onNavigate('chat')}>Open assistant</UnifiedButton>
       </Surface>
 

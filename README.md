@@ -49,6 +49,16 @@ export function Example() {
 The typed root export remains available for convenience, while component
 subpaths keep application imports explicit and independently consumable.
 
+Documentation hosts can render the exact Orbit catalog through the dedicated
+SSR-safe entry instead of duplicating its pages:
+
+```tsx
+import { UnifiedSession } from '@midwess/orbit-ui/docs'
+import '@midwess/orbit-ui/docs.css'
+
+<UnifiedSession basePath="/ui" initialPath="/ui/components/alert" />
+```
+
 ## Install source with shadcn
 
 Orbit is also a public shadcn-compatible GitHub registry. Copy a component and

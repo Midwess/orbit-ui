@@ -4,19 +4,25 @@ import { BlocksCatalogPage } from './docs/BlocksCatalogPage'
 import { componentCatalog, blockCatalog, type CatalogSection } from './docs/catalog'
 import { ComponentsCatalogPage } from './docs/ComponentsCatalogPage'
 import { DocsSidebar } from './docs/DocsSidebar'
-import { withBasePath, withoutBasePath } from '../../lib/base-path'
+import { BasePathProvider, normalizeBasePath, withBasePath, withoutBasePath } from '../../lib/base-path'
 import './unified.css'
 
 type CatalogRoute = { section: CatalogSection; slug: string }
+export type UnifiedTheme = 'dark' | 'light'
+export type UnifiedSessionProps = {
+  basePath?: string
+  initialPath?: string
+  initialTheme?: UnifiedTheme
+}
 
-function readRoute(): CatalogRoute {
-  const [section, slug] = withoutBasePath(window.location.pathname).split('/').filter(Boolean)
+function readRoute(pathname: string, basePath: string): CatalogRoute {
+  const [section, slug] = withoutBasePath(pathname, basePath).split('/').filter(Boolean)
   if (section === 'blocks') return { section: 'blocks', slug: blockCatalog.some((item) => item.slug === slug) ? slug : blockCatalog[0].slug }
   return { section: 'components', slug: componentCatalog.some((item) => item.slug === slug) ? slug : componentCatalog[0].slug }
 }
 
-function getInitialTheme(): 'dark' | 'light' {
-  return new URLSearchParams(window.location.search).get('theme') === 'light' ? 'light' : 'dark'
+function readTheme(search: string): UnifiedTheme {
+  return new URLSearchParams(search).get('theme') === 'light' ? 'light' : 'dark'
 }
 
 function findSearchDestination(value: string): CatalogRoute | null {
@@ -28,26 +34,31 @@ function findSearchDestination(value: string): CatalogRoute | null {
   return block ? { section: 'blocks', slug: block.slug } : null
 }
 
-export function UnifiedSession() {
-  const [route, setRoute] = useState<CatalogRoute>(readRoute)
-  const [theme, setTheme] = useState<'dark' | 'light'>(getInitialTheme)
+export function UnifiedSession({ basePath, initialPath, initialTheme = 'dark' }: UnifiedSessionProps = {}) {
+  const normalizedBasePath = normalizeBasePath(basePath)
+  const defaultPath = withBasePath('/components/select', normalizedBasePath)
+  const [route, setRoute] = useState<CatalogRoute>(() => readRoute(
+    initialPath ?? (typeof window === 'undefined' ? defaultPath : window.location.pathname),
+    normalizedBasePath,
+  ))
+  const [theme, setTheme] = useState<UnifiedTheme>(initialTheme)
   const [query, setQuery] = useState('')
   const [layout, setLayout] = useState<'grid' | 'single'>('grid')
 
   useEffect(() => {
-    const handlePopState = () => setRoute(readRoute())
+    const handlePopState = () => setRoute(readRoute(window.location.pathname, normalizedBasePath))
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
+  }, [normalizedBasePath])
+
+  useEffect(() => {
+    setTheme(readTheme(window.location.search))
   }, [])
 
   useEffect(() => {
     const color = theme === 'dark' ? '#20211f' : '#f4f6f2'
     document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', color)
     document.documentElement.style.colorScheme = theme
-    const url = new URL(window.location.href)
-    if (theme === 'light') url.searchParams.set('theme', 'light')
-    else url.searchParams.delete('theme')
-    window.history.replaceState(window.history.state, '', url)
     return () => {
       document.documentElement.style.colorScheme = 'dark'
       document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', '#20211f')
@@ -56,13 +67,15 @@ export function UnifiedSession() {
 
   function navigate(section: CatalogSection, slug: string) {
     const next = { section, slug }
-    window.history.pushState(next, '', `${withBasePath(`/${section}/${slug}`)}${window.location.search}`)
+    const themeSearch = theme === 'light' ? '?theme=light' : ''
+    window.history.pushState(next, '', `${withBasePath(`/${section}/${slug}`, normalizedBasePath)}${themeSearch}`)
     setRoute(next)
     window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   }
 
   function routeHref(section: CatalogSection, slug: string) {
-    return `${withBasePath(`/${section}/${slug}`)}${window.location.search}`
+    const themeSearch = theme === 'light' ? '?theme=light' : ''
+    return `${withBasePath(`/${section}/${slug}`, normalizedBasePath)}${themeSearch}`
   }
 
   function followRoute(event: MouseEvent<HTMLAnchorElement>, section: CatalogSection, slug: string) {
@@ -80,9 +93,16 @@ export function UnifiedSession() {
     }
   }
 
-  const toggleTheme = () => setTheme((current) => current === 'dark' ? 'light' : 'dark')
+  const toggleTheme = () => setTheme((current) => {
+    const next = current === 'dark' ? 'light' : 'dark'
+    const url = new URL(window.location.href)
+    if (next === 'light') url.searchParams.set('theme', 'light')
+    else url.searchParams.delete('theme')
+    window.history.replaceState(window.history.state, '', url)
+    return next
+  })
 
-  return <div className="unified-session orbit-ui" data-unified-theme={theme} data-orbit-theme={theme} data-doc-layout={layout}>
+  return <BasePathProvider basePath={normalizedBasePath}><div className="unified-session orbit-ui" data-unified-theme={theme} data-orbit-theme={theme} data-doc-layout={layout}>
     <a className="u-skip-link" href="#main-content">Skip to main content</a>
     <header className="u-doc-header">
       <a className="u-doc-brand" href={routeHref('components', 'select')} onClick={(event) => followRoute(event, 'components', 'select')}><span>O</span><strong>ORBIT UI</strong></a>
@@ -100,5 +120,5 @@ export function UnifiedSession() {
       <DocsSidebar section={route.section} slug={route.slug} onNavigate={followRoute} routeHref={routeHref} />
       {route.section === 'components' ? <ComponentsCatalogPage slug={route.slug} /> : <BlocksCatalogPage slug={route.slug} theme={theme} onTheme={toggleTheme} onNavigate={(slug) => navigate('blocks', slug)} />}
     </div>
-  </div>
+  </div></BasePathProvider>
 }
