@@ -3,6 +3,15 @@ import { Icon } from '../../../components/ui/icon'
 import { Avatar } from '../../../components/ui/avatar'
 import { Badge } from '../../../components/ui/badge'
 import { Button as UnifiedButton } from '../../../components/ui/button'
+import { IconAction } from '../../../components/ui/icon-action'
+import {
+  Alert,
+  AlertAction,
+  AlertContent,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from '../../../components/ui/alert'
 import { DemoCard } from './DemoCard'
 
 export const advancedComponentSlugs = new Set(['accordion', 'alert', 'checkbox', 'combobox', 'dialog', 'file-upload', 'calendar', 'rating', 'skeleton', 'stepper', 'switch', 'timeline'])
@@ -19,7 +28,7 @@ function AccordionExamples() {
 
 function AlertExamples() {
   const [warningVisible, setWarningVisible] = useState(true)
-  return <div className="u-demo-grid"><DemoCard title="Semantic alerts" description="Success, warning, and neutral feedback." code={'<Alert tone="warning" title="Inventory risk" />'}><div className="u-alert-stack"><div className="u-alert u-alert--success" role="status"><Icon name="check" /><span><b>Changes saved</b><small>Your workspace settings are now live.</small></span></div>{warningVisible ? <div className="u-alert u-alert--warning" role="alert"><Icon name="warning" /><span><b>Inventory risk</b><small>Oat milk is below the evening safety level.</small></span><button type="button" onClick={() => setWarningVisible(false)} aria-label="Dismiss inventory warning"><Icon name="close" size={16} /></button></div> : <UnifiedButton size="compact" tone="quiet" onClick={() => setWarningVisible(true)}>Restore warning</UnifiedButton>}<div className="u-alert" role="status"><Icon name="bell" /><span><b>Daily brief ready</b><small>Three decisions were summarized by Orbit AI.</small></span></div></div></DemoCard><DemoCard title="Inline banner" description="A high-priority callout with one action." code={'<Alert action={<Button>Review</Button>} />'}><div className="u-alert-banner" role="alert"><span className="u-ai-orb"><Icon name="sparkles" /></span><div><b>{warningVisible ? 'Two signals deserve attention' : 'Signals reviewed'}</b><p>Kitchen coverage is at 78% and order #1046 is delayed.</p></div><UnifiedButton tone="neutral" size="compact" onClick={() => setWarningVisible((current) => !current)}>{warningVisible ? 'Review signals' : 'Mark unresolved'}</UnifiedButton></div></DemoCard></div>
+  return <div className="u-demo-grid"><DemoCard title="Semantic alerts" description="Success, warning, and neutral feedback." code={'<Alert tone="warning"><AlertTitle>Inventory risk</AlertTitle></Alert>'}><div className="u-alert-stack"><Alert tone="success"><AlertIcon><Icon name="check" /></AlertIcon><AlertContent><AlertTitle>Changes saved</AlertTitle><AlertDescription>Your workspace settings are now live.</AlertDescription></AlertContent></Alert>{warningVisible ? <Alert tone="warning" role="alert"><AlertIcon><Icon name="warning" /></AlertIcon><AlertContent><AlertTitle>Inventory risk</AlertTitle><AlertDescription>Oat milk is below the evening safety level.</AlertDescription></AlertContent><AlertAction><IconAction icon="close" label="Dismiss inventory warning" onClick={() => setWarningVisible(false)} /></AlertAction></Alert> : <UnifiedButton size="compact" tone="quiet" onClick={() => setWarningVisible(true)}>Restore warning</UnifiedButton>}<Alert><AlertIcon><Icon name="bell" /></AlertIcon><AlertContent><AlertTitle>Daily brief ready</AlertTitle><AlertDescription>Three decisions were summarized by Orbit AI.</AlertDescription></AlertContent></Alert></div></DemoCard><DemoCard title="Inline banner" description="A high-priority callout with one action." code={'<Alert tone="accent" appearance="prominent">…</Alert>'}><Alert tone="accent" appearance="prominent" role="alert"><AlertIcon><Icon name="sparkles" /></AlertIcon><AlertContent><AlertTitle>{warningVisible ? 'Two signals deserve attention' : 'Signals reviewed'}</AlertTitle><AlertDescription>Kitchen coverage is at 78% and order #1046 is delayed.</AlertDescription></AlertContent><AlertAction><UnifiedButton tone="neutral" size="compact" onClick={() => setWarningVisible((current) => !current)}>{warningVisible ? 'Review signals' : 'Mark unresolved'}</UnifiedButton></AlertAction></Alert></DemoCard></div>
 }
 
 function CheckboxExamples() {

@@ -1,6 +1,6 @@
 {
   "name": "@midwess/orbit-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Composable React components and product blocks for the Orbit design language.",
   "license": "MIT",
   "type": "module",
@@ -21,6 +21,11 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./alert": {
+      "types": "./dist/types/components/ui/alert.d.ts",
+      "import": "./dist/alert.js",
+      "require": "./dist/alert.cjs"
     },
     "./avatar": {
       "types": "./dist/types/components/ui/avatar.d.ts",

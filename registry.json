@@ -40,6 +40,20 @@
       ]
     },
     {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Composable semantic feedback with shared Orbit continuous-corner geometry.",
+      "registryDependencies": ["Midwess/orbit-ui/orbit-theme", "Midwess/orbit-ui/cn"],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "@ui/alert.tsx"
+        }
+      ]
+    },
+    {
       "name": "icon",
       "type": "registry:ui",
       "title": "Icon",

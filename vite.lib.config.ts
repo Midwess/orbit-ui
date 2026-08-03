@@ -14,6 +14,7 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(import.meta.dirname, 'src/index.ts'),
+        alert: resolve(import.meta.dirname, 'src/components/ui/alert.tsx'),
         avatar: resolve(import.meta.dirname, 'src/components/ui/avatar.tsx'),
         badge: resolve(import.meta.dirname, 'src/components/ui/badge.tsx'),
         button: resolve(import.meta.dirname, 'src/components/ui/button.tsx'),

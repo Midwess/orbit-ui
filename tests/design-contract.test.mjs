@@ -21,6 +21,13 @@ test('buttons use the shared rounded control geometry', () => {
   assert.match(styles, /\.u-icon-action\s*\{[^{}]*border-radius:\s*var\(--u-radius-icon-button, 17px\);/)
 })
 
+test('alerts use the shared continuous-corner geometry', () => {
+  assert.match(tokens, /--u-radius-alert:\s*20px;/)
+  assert.match(tokens, /--u-radius-alert-prominent:\s*24px;/)
+  assert.match(styles, /\.u-alert\s*\{[^{}]*border-radius:\s*var\(--u-radius-alert, 20px\);/)
+  assert.match(styles, /\.u-alert--prominent\s*\{[^{}]*border-radius:\s*var\(--u-radius-alert-prominent, 24px\);/)
+})
+
 test('true circles and capsules retain round geometry', () => {
   assert.match(tokens, /--u-corner-shape-round:\s*round;/)
   assert.match(styles, /\.u-badge[^{}]*\.u-avatar[^{}]*\{\s*corner-shape:\s*var\(--u-corner-shape-round, round\);\s*\}/)
@@ -32,7 +39,7 @@ test('the smallest readable interface label starts at twelve pixels', () => {
 })
 
 test('the public package exposes typed, directly importable components', () => {
-  for (const name of ['avatar', 'badge', 'button', 'icon', 'icon-action', 'progress', 'section-title', 'surface', 'view-heading', 'cn']) {
+  for (const name of ['alert', 'avatar', 'badge', 'button', 'icon', 'icon-action', 'progress', 'section-title', 'surface', 'view-heading', 'cn']) {
     const entry = packageJson.exports[`./${name}`]
     assert.ok(entry, `missing package export: ${name}`)
     assert.match(entry.types, /^\.\/dist\/types\//)
@@ -44,6 +51,7 @@ test('the public package exposes typed, directly importable components', () => {
 test('the shadcn source registry references real TypeScript and style files', async () => {
   assert.equal(registry.$schema, 'https://ui.shadcn.com/schema/registry.json')
   assert.ok(registry.items.some((item) => item.name === 'orbit-theme'))
+  assert.ok(registry.items.some((item) => item.name === 'alert'))
   assert.ok(registry.items.some((item) => item.name === 'button'))
 
   for (const item of registry.items) {

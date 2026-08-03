@@ -1,3 +1,12 @@
+export {
+  Alert,
+  AlertAction,
+  AlertContent,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from './components/ui/alert'
+export type { AlertAppearance, AlertProps, AlertTone } from './components/ui/alert'
 export { Avatar, AvatarGroup } from './components/ui/avatar'
 export type { AvatarGroupProps, AvatarProps, AvatarSize } from './components/ui/avatar'
 export { Badge } from './components/ui/badge'

@@ -19,6 +19,12 @@ Then import only the component entry points an application uses:
 ```tsx
 import { Badge } from '@midwess/orbit-ui/badge'
 import { Button } from '@midwess/orbit-ui/button'
+import {
+  Alert,
+  AlertContent,
+  AlertDescription,
+  AlertTitle,
+} from '@midwess/orbit-ui/alert'
 import { Surface } from '@midwess/orbit-ui/surface'
 
 export function Example() {
@@ -29,6 +35,12 @@ export function Example() {
         <h2>Evening service is ready</h2>
         <Button tone="neutral">Open brief</Button>
       </Surface>
+      <Alert tone="warning">
+        <AlertContent>
+          <AlertTitle>Inventory risk</AlertTitle>
+          <AlertDescription>Oat milk is below the safety level.</AlertDescription>
+        </AlertContent>
+      </Alert>
     </section>
   )
 }
@@ -43,7 +55,7 @@ Orbit is also a public shadcn-compatible GitHub registry. Copy a component and
 its declared dependencies into an application with:
 
 ```bash
-npx shadcn@latest add Midwess/orbit-ui/button
+npx shadcn@latest add Midwess/orbit-ui/alert
 ```
 
 Registry consumers own the installed TypeScript source. Package consumers use
@@ -71,7 +83,7 @@ registry.json            shadcn-compatible GitHub source registry
 public/                  Demonstration imagery used by documentation blocks
 ```
 
-The public package exports `Button`, `IconAction`, `Surface`, `Badge`, `Avatar`,
+The public package exports `Alert`, `Button`, `IconAction`, `Surface`, `Badge`, `Avatar`,
 `AvatarGroup`, `ProgressBar`, `ViewHeading`, `SectionTitle`, `Icon`, and `cn`
 through both typed root exports and component subpaths.
 
