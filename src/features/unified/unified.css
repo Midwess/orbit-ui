@@ -1,5 +1,12 @@
 @import '../../styles/index.css';
 
+.unified-session { font-synthesis: none; }
+.unified-session :where(button, input, select, textarea) { font: inherit; }
+.unified-session :where(button) { border: 0; cursor: pointer; }
+.unified-session :where(h1, h2, h3, p) { margin: 0; }
+.unified-session :where(h1, h2, h3) { font-weight: 700; }
+.unified-session .icon { flex: 0 0 auto; }
+
 .unified-session {
   min-height: 100svh;
   padding: clamp(54px, 5vw, 72px) clamp(16px, 4vw, 62px) clamp(20px, 4vw, 62px);
