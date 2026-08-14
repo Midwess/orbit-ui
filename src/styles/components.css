@@ -47,6 +47,97 @@
 .u-progress { display: grid; gap: 8px; }.u-progress > span { display: flex; justify-content: space-between; color: var(--u-muted); font-size: 11px; }.u-progress > span b { color: var(--u-text); }.u-progress > i { height: 7px; overflow: hidden; border-radius: 999px; background: var(--u-raised); }.u-progress > i > i { height: 100%; display: block; border-radius: inherit; background: var(--u-accent); }
 .u-badge, .u-avatar, .u-progress > i, .u-progress > i > i { corner-shape: var(--u-corner-shape-round, round); }
 
+.u-logo { max-width: 100%; height: auto; display: block; overflow: visible; }
+.u-logo__actor, .u-logo__depth, .u-logo__piece, .u-logo__shadow, .u-logo__impact { transform-box: fill-box; }
+.u-logo__actor { transform-origin: 50% 88%; }
+.u-logo__depth, .u-logo__piece, .u-logo__shadow, .u-logo__impact { transform-origin: center; }
+.u-logo__shadow, .u-logo__impact { opacity: 0; }
+.u-logo--trace .u-logo__actor { animation: u-logo-character-flight 4.236s cubic-bezier(.22, .72, .2, 1) infinite both; }
+.u-logo--trace .u-logo__shadow { animation: u-logo-character-shadow 4.236s ease-in-out infinite both; }
+.u-logo--trace .u-logo__impact { animation: u-logo-character-impact 4.236s ease-out infinite both; }
+.u-logo--trace .u-logo__depth { animation: u-logo-character-depth 4.236s cubic-bezier(.22, .72, .2, 1) infinite both; }
+.u-logo--trace .u-logo__piece { animation: u-logo-character-piece 4.236s cubic-bezier(.22, .72, .2, 1) infinite both; }
+.u-logo--trace .u-logo__piece--outer-left { --u-logo-fold: 62px; --u-logo-kick: -18px; --u-logo-tilt: 12deg; --u-logo-land: -4deg; --u-logo-rebound: -6px; }
+.u-logo--trace .u-logo__piece--inner-left { --u-logo-fold: 36px; --u-logo-kick: -10px; --u-logo-tilt: 8deg; --u-logo-land: -3deg; --u-logo-rebound: -3px; }
+.u-logo--trace .u-logo__piece--inner-right { --u-logo-fold: -36px; --u-logo-kick: 10px; --u-logo-tilt: -8deg; --u-logo-land: 3deg; --u-logo-rebound: 3px; }
+.u-logo--trace .u-logo__piece--outer-right { --u-logo-fold: -62px; --u-logo-kick: 18px; --u-logo-tilt: -12deg; --u-logo-land: 4deg; --u-logo-rebound: 6px; }
+.u-logo--trace .u-logo__piece--center { animation-name: u-logo-character-center; }
+.u-logo--trace .u-logo__arc { stroke-dasharray: 1; stroke-dashoffset: 1; animation: u-logo-golden-trace 4.236s cubic-bezier(.618, 0, .382, 1) infinite both; }
+.u-logo--trace .u-logo__arc--inner { animation-delay: .118s; }
+.u-logo--trace .u-logo__arc--outer { animation-delay: .236s; }
+
+@keyframes u-logo-golden-trace {
+  0%, 3% { opacity: 0; stroke-dashoffset: 1; }
+  6% { opacity: .72; stroke-dashoffset: .68; }
+  11.8% { opacity: 1; stroke-dashoffset: 0; }
+  38.2%, 76.4% { opacity: 1; stroke-dashoffset: 0; }
+  100% { opacity: 0; stroke-dashoffset: -1; }
+}
+
+@keyframes u-logo-character-flight {
+  0% { opacity: 0; transform: translateY(34px) rotate(-5deg) scale(.82, .72); }
+  6% { opacity: 1; }
+  11.8% { transform: translateY(30px) rotate(-4deg) scale(1.14, .76); }
+  23.6% { transform: translateY(-52px) rotate(4deg) scale(.88, 1.14); }
+  32% { transform: translateY(-14px) rotate(1.2deg) scale(.96, 1.04); }
+  38.2% { transform: translateY(12px) rotate(-2.2deg) scale(1.12, .86); }
+  47.2% { transform: translateY(-10px) rotate(1.2deg) scale(.96, 1.05); }
+  55% { transform: translateY(3px) rotate(-.6deg) scale(1.03, .97); }
+  61.8%, 76.4% { opacity: 1; transform: none; }
+  88.2% { opacity: 1; transform: translateY(-5px) rotate(.8deg); }
+  100% { opacity: 0; transform: translateY(-26px) rotate(3deg) scale(.94, 1.06); }
+}
+
+@keyframes u-logo-character-piece {
+  0% { transform: translateX(var(--u-logo-fold)) rotate(var(--u-logo-tilt)) scale(.66); }
+  11.8% { transform: translateX(var(--u-logo-fold)) rotate(var(--u-logo-tilt)) scale(.76); }
+  23.6% { transform: translateX(var(--u-logo-kick)) rotate(var(--u-logo-land)) scale(1.08); }
+  38.2% { transform: translateX(var(--u-logo-rebound)) rotate(var(--u-logo-land)) scale(.95); }
+  47.2% { transform: translateX(var(--u-logo-kick)) rotate(0deg) scale(1.03); }
+  61.8%, 88.2% { transform: none; }
+  100% { transform: translateX(var(--u-logo-kick)) rotate(var(--u-logo-land)) scale(.94); }
+}
+
+@keyframes u-logo-character-center {
+  0% { transform: translateY(34px) scale(.3, .46); }
+  11.8% { transform: translateY(24px) scale(.64, .48); }
+  23.6% { transform: translateY(-18px) scale(.72, 1.3); }
+  38.2% { transform: translateY(8px) scale(1.34, .7); }
+  47.2% { transform: translateY(-6px) scale(.88, 1.14); }
+  55% { transform: translateY(3px) scale(1.08, .92); }
+  61.8%, 88.2% { transform: none; }
+  100% { transform: translateY(-10px) scale(.88, 1.08); }
+}
+
+@keyframes u-logo-character-depth {
+  0% { opacity: .04; transform: translate(-7px, -11px); }
+  11.8% { opacity: .16; transform: translate(-4px, -7px); }
+  23.6% { opacity: .56; transform: translate(-11px, -16px); }
+  38.2% { opacity: 1; transform: translate(6px, 10px); }
+  47.2% { opacity: .72; transform: translate(-2px, -3px); }
+  61.8%, 76.4% { opacity: 1; transform: none; }
+  100% { opacity: .12; transform: translate(-6px, -9px); }
+}
+
+@keyframes u-logo-character-shadow {
+  0% { opacity: 0; transform: scale(.64); }
+  11.8% { opacity: .3; transform: scale(1.1, 1.2); }
+  23.6% { opacity: .08; transform: scale(.48, .68); }
+  38.2% { opacity: .38; transform: scale(1.24, 1.16); }
+  47.2% { opacity: .16; transform: scale(.82); }
+  61.8%, 76.4% { opacity: .22; transform: none; }
+  100% { opacity: 0; transform: scale(.68); }
+}
+
+@keyframes u-logo-character-impact {
+  0%, 32% { opacity: 0; transform: scale(.35); }
+  38.2% { opacity: .52; transform: scale(.62); }
+  50% { opacity: 0; transform: scale(1.45); }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orbit-ui *, .orbit-ui *::before, .orbit-ui *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .u-logo--trace .u-logo__actor, .u-logo--trace .u-logo__depth, .u-logo--trace .u-logo__piece, .u-logo--trace .u-logo__arc { animation: none; opacity: 1; transform: none; stroke-dashoffset: 0; }
+  .u-logo--trace .u-logo__shadow, .u-logo--trace .u-logo__impact { display: none; }
 }

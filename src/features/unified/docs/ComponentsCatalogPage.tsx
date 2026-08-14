@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Icon } from '../../../components/ui/icon'
+import { Logo } from '../../../components/ui/logo'
 import { Avatar, AvatarGroup } from '../../../components/ui/avatar'
 import { Badge } from '../../../components/ui/badge'
 import { Button as UnifiedButton } from '../../../components/ui/button'
@@ -8,6 +9,13 @@ import { Surface } from '../../../components/ui/surface'
 import { componentCatalog } from './catalog'
 import { AdvancedComponentExamples, advancedComponentSlugs } from './AdvancedComponentExamples'
 import { DemoCard } from './DemoCard'
+
+function LogoExamples() {
+  return <div className="u-demo-grid">
+    <DemoCard title="Static mark" description="The exact dimensional Midwess mark for stable brand surfaces." code={'<Logo width={220} />'}><Logo width={220} /></DemoCard>
+    <DemoCard title="Golden character motion" description="A cinematic hop with anticipation, squash-and-stretch, follow-through, and φ-derived timing." code={'<Logo motion="trace" width={220} />'}><Logo motion="trace" width={220} /></DemoCard>
+  </div>
+}
 
 function SelectExamples() {
   const [location, setLocation] = useState('astoria')
@@ -67,6 +75,7 @@ function CardExamples() {
 }
 
 function renderExamples(slug: string) {
+  if (slug === 'logo') return <LogoExamples />
   if (advancedComponentSlugs.has(slug)) return <AdvancedComponentExamples slug={slug} />
   if (slug === 'button') return <ButtonExamples />
   if (slug === 'input') return <InputExamples />

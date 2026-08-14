@@ -68,6 +68,20 @@
       ]
     },
     {
+      "name": "logo",
+      "type": "registry:ui",
+      "title": "Logo",
+      "description": "The Midwess golden-ratio circular-boundary mark with static and traced motion variants.",
+      "registryDependencies": ["Midwess/orbit-ui/orbit-theme", "Midwess/orbit-ui/cn"],
+      "files": [
+        {
+          "path": "src/components/ui/logo.tsx",
+          "type": "registry:ui",
+          "target": "@ui/logo.tsx"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",

@@ -11,6 +11,7 @@ export type CatalogItem = {
 }
 
 export const componentCatalog: CatalogItem[] = [
+  { slug: 'logo', label: 'Logo', count: 2, icon: 'sparkles', description: 'The Midwess mark in static and characterful golden-ratio motion presentations.' },
   { slug: 'select', label: 'Select', count: 6, icon: 'chevron', description: 'Accessible option pickers for simple, grouped, and operational choices.' },
   { slug: 'button', label: 'Button', count: 8, icon: 'arrow', description: 'Purposeful actions with clear hierarchy, useful sizing, and visible states.' },
   { slug: 'input', label: 'Input & Field', count: 5, icon: 'search', description: 'Inputs, search fields, labels, descriptions, and validation states.' },

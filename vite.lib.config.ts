@@ -20,6 +20,7 @@ export default defineConfig({
         button: resolve(import.meta.dirname, 'src/components/ui/button.tsx'),
         icon: resolve(import.meta.dirname, 'src/components/ui/icon.tsx'),
         'icon-action': resolve(import.meta.dirname, 'src/components/ui/icon-action.tsx'),
+        logo: resolve(import.meta.dirname, 'src/components/ui/logo.tsx'),
         progress: resolve(import.meta.dirname, 'src/components/ui/progress.tsx'),
         'section-title': resolve(import.meta.dirname, 'src/components/ui/section-title.tsx'),
         surface: resolve(import.meta.dirname, 'src/components/ui/surface.tsx'),

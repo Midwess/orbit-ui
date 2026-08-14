@@ -4,6 +4,7 @@ import test from 'node:test'
 
 const tokens = await readFile(new URL('../src/styles/tokens.css', import.meta.url), 'utf8')
 const styles = await readFile(new URL('../src/styles/components.css', import.meta.url), 'utf8')
+const logo = await readFile(new URL('../src/components/ui/logo.tsx', import.meta.url), 'utf8')
 const registry = JSON.parse(await readFile(new URL('../registry.json', import.meta.url), 'utf8'))
 const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
@@ -33,13 +34,26 @@ test('true circles and capsules retain round geometry', () => {
   assert.match(styles, /\.u-badge[^{}]*\.u-avatar[^{}]*\{\s*corner-shape:\s*var\(--u-corner-shape-round, round\);\s*\}/)
 })
 
+test('the Midwess logo preserves golden circular geometry and motion', () => {
+  assert.match(logo, /A1277\.515442 1277\.515442/)
+  assert.match(logo, /A789\.547964 789\.547964/)
+  assert.match(logo, /A487\.967478 487\.967478/)
+  assert.match(logo, /motion = 'static'/)
+  assert.match(logo, /u-logo__actor/)
+  assert.match(logo, /u-logo__shadow/)
+  assert.match(styles, /u-logo-character-flight 4\.236s/)
+  assert.match(styles, /38\.2%/)
+  assert.match(styles, /61\.8%/)
+  assert.match(styles, /prefers-reduced-motion: reduce/)
+})
+
 test('the smallest readable interface label starts at twelve pixels', () => {
   assert.match(tokens, /--u-text-xs:\s*0\.75rem;/)
   assert.match(tokens, /--u-text-sm:\s*0\.875rem;/)
 })
 
 test('the public package exposes typed, directly importable components', () => {
-  for (const name of ['alert', 'avatar', 'badge', 'button', 'icon', 'icon-action', 'progress', 'section-title', 'surface', 'view-heading', 'cn']) {
+  for (const name of ['alert', 'avatar', 'badge', 'button', 'icon', 'icon-action', 'logo', 'progress', 'section-title', 'surface', 'view-heading', 'cn']) {
     const entry = packageJson.exports[`./${name}`]
     assert.ok(entry, `missing package export: ${name}`)
     assert.match(entry.types, /^\.\/dist\/types\//)
@@ -62,6 +76,7 @@ test('the shadcn source registry references real TypeScript and style files', as
   assert.ok(registry.items.some((item) => item.name === 'orbit-theme'))
   assert.ok(registry.items.some((item) => item.name === 'alert'))
   assert.ok(registry.items.some((item) => item.name === 'button'))
+  assert.ok(registry.items.some((item) => item.name === 'logo'))
 
   for (const item of registry.items) {
     assert.ok(item.name)

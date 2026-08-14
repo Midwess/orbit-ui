@@ -19,6 +19,7 @@ Then import only the component entry points an application uses:
 ```tsx
 import { Badge } from '@midwess/orbit-ui/badge'
 import { Button } from '@midwess/orbit-ui/button'
+import { Logo } from '@midwess/orbit-ui/logo'
 import {
   Alert,
   AlertContent,
@@ -30,6 +31,7 @@ import { Surface } from '@midwess/orbit-ui/surface'
 export function Example() {
   return (
     <section className="orbit-ui" data-orbit-theme="dark">
+      <Logo motion="trace" />
       <Surface tone="coral">
         <Badge>Operations</Badge>
         <h2>Evening service is ready</h2>
@@ -93,7 +95,7 @@ registry.json            shadcn-compatible GitHub source registry
 public/                  Demonstration imagery used by documentation blocks
 ```
 
-The public package exports `Alert`, `Button`, `IconAction`, `Surface`, `Badge`, `Avatar`,
+The public package exports `Alert`, `Button`, `IconAction`, `Logo`, `Surface`, `Badge`, `Avatar`,
 `AvatarGroup`, `ProgressBar`, `ViewHeading`, `SectionTitle`, `Icon`, and `cn`
 through both typed root exports and component subpaths.
 
